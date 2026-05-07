@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сканер сетевых портов</title>
+  <link rel="icon" type="image/x-icon" href="/images/Gerb_100.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Сканер сетевых портов</h1>
+      <p class="subtitle">Практическая часть курсовой работы по дисциплине «Компьютерные сети»<br>студента 2 курса группы ИВТ-б-о-241(2) Кравченко Виталия Сергеевича.</p>
+    </header>
+
+    <main id="app">
+      <!-- STEP 1: Key Verification -->
+      <section id="step-key" class="step active">
+        <h2>Авторизация</h2>
+        <form id="key-form" autocomplete="off">
+          <div class="form-group">
+            <label for="access-key">Пожалуйста, введите ключ доступа.</label>
+            <input type="password" id="access-key" placeholder="Ключ" required>
+          </div>
+          <button type="submit" id="verify-btn" class="btn primary">Подтвердить Вход</button>
+        </form>
+        <p id="key-msg" class="msg hidden"></p>
+      </section>
+
+      <!-- STEP 2: Scan Configuration -->
+      <section id="step-config" class="step hidden">
+        <div class="status-bar">
+          <span class="status-verified">Ключ подтверждён</span>
+          <span id="uses-display" class="badge">Осталось сканирований: 0</span>
+        </div>
+        <form id="scan-form">
+          <div class="form-group">
+            <label for="target-ip">IPv4-Адрес</label>
+            <input type="text" id="target-ip" placeholder="77.88.8.8" required>
+          </div>
+          <div class="form-group">
+            <label for="target-ports">Порты</label>
+            <input type="text" id="target-ports" placeholder="22,80,443" required>
+          </div>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="disclaimer" required>
+            <label for="disclaimer">Я подтверждаю, что имею явное разрешение на сканирование данного IP-адреса.</label>
+          </div>
+          <button type="submit" id="scan-btn" class="btn success" disabled>Сканировать</button>
+        </form>
+        <p id="scan-msg" class="msg hidden"></p>
+		<button id="exit-btn" type="button" class="btn secondary" style="margin-top: 1rem;">Выйти</button>
+      </section>
+
+      <!-- STEP 3: Results -->
+      <section id="step-results" class="step hidden">
+        <h2>Результат сканирования</h2>
+        <div id="scan-meta" class="meta-info"></div>
+        <div class="table-container">
+          <table id="results-table">
+            <thead>
+              <tr>
+                <th>Порт</th>
+                <th>Состояние</th>
+                <th>Сервис</th>
+              </tr>
+            </thead>
+            <tbody id="results-body"></tbody>
+          </table>
+        </div>
+        <button id="reset-btn" class="btn secondary">Вернуться</button>
+      </section>
+
+      <!-- Loading Overlay -->
+      <div id="loading-overlay" class="hidden">
+        <div class="spinner"></div>
+        <p id="loading-text">Пожалуйста, подождите...</p>
+      </div>
+    </main>
+
+    <footer>
+      <p>Поддомен от <a href="https://www.duckdns.org/" style="text-decoration: none;">duckdns.org</a>. SSL сертификат от <a href="https://certbot.eff.org/" style="text-decoration: none;">certbot.eff.org</a>.</p>
+    </footer>
+  </div>
+  <script src="scripts/app.js"></script>
+</body>
+</html>
